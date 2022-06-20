@@ -24,6 +24,7 @@ export type Films = {
   poster_path: string;
   overview: string;
   the_amount: number;
+  price: number;
 };
 
 type ContextProps = {

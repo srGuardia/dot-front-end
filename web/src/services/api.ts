@@ -7,7 +7,18 @@ class APIService {
 
     const formatData = data.results as Films[];
 
-    return formatData;
+    let newData: Films[] = [];
+
+    const newObj = formatData.forEach((item) => {
+      const obj = {
+        ...item,
+        price: 79.99,
+      };
+
+      newData.push(obj);
+    });
+
+    return newData;
   }
 
   async searchFilms(search: string): Promise<Films[] | []> {

@@ -1,17 +1,10 @@
-import { Button, Card, Col, Row } from 'antd';
+import { Button, Card, Row } from 'antd';
 import { useContext, useEffect, useState } from 'react';
-import {
-  AiFillHeart,
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-} from 'react-icons/ai';
-import { AppContext, Films } from '../../context';
-import colors from '../../global/colors';
-import api from '../../services/api';
-import { isFavorite, LocalStorageProps } from '../../utils/functions';
-import { Container } from './styles';
 
-const { Meta } = Card;
+import { CardFilms } from '../../components/Card';
+import { AppContext, Films } from '../../context';
+import api from '../../services/api';
+import { Container } from './styles';
 
 const Home = () => {
   const [films, setFilms] = useState<Films[] | []>([]);
@@ -35,103 +28,11 @@ const Home = () => {
 
   return (
     <Container>
-      <Row gutter={[10, 10]}>
-        {searchFilms
-          ? searchFilms.map((item, index) => (
-              <Col key={index} xs={24} sm={12} md={8} lg={6}>
-                <Row justify='space-evenly'>
-                  <Card
-                    style={{ width: 240 }}
-                    cover={
-                      <img
-                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                        alt={item.title}
-                        loading='lazy'
-                      />
-                    }
-                    actions={[
-                      isFavorite(item.id, LocalStorageProps.favorites) ? (
-                        <AiFillHeart
-                          color={colors.red}
-                          onClick={() =>
-                            removeLocalStorage(
-                              LocalStorageProps.favorites,
-                              item
-                            )
-                          }
-                        />
-                      ) : (
-                        <AiOutlineHeart
-                          onClick={() =>
-                            saveLocalStorage(LocalStorageProps.favorites, item)
-                          }
-                        />
-                      ),
-                      <AiOutlineShoppingCart
-                        onClick={() =>
-                          saveLocalStorage(LocalStorageProps.cart, item)
-                        }
-                      />,
-                    ]}
-                  >
-                    <Meta
-                      title={item.title}
-                      description={
-                        item.overview ? item.overview : 'Sem decrição...'
-                      }
-                    />
-                  </Card>
-                </Row>
-              </Col>
-            ))
-          : films.map((item, index) => (
-              <Col key={index} xs={24} sm={12} md={8} lg={6}>
-                <Row justify='space-evenly'>
-                  <Card
-                    style={{ width: 240 }}
-                    cover={
-                      <img
-                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                        alt={item.title}
-                        loading='lazy'
-                      />
-                    }
-                    actions={[
-                      isFavorite(item.id, LocalStorageProps.favorites) ? (
-                        <AiFillHeart
-                          color={colors.red}
-                          onClick={() =>
-                            removeLocalStorage(
-                              LocalStorageProps.favorites,
-                              item
-                            )
-                          }
-                        />
-                      ) : (
-                        <AiOutlineHeart
-                          onClick={() =>
-                            saveLocalStorage(LocalStorageProps.favorites, item)
-                          }
-                        />
-                      ),
-                      <AiOutlineShoppingCart
-                        onClick={() =>
-                          saveLocalStorage(LocalStorageProps.cart, item)
-                        }
-                      />,
-                    ]}
-                  >
-                    <Meta
-                      title={item.title}
-                      description={
-                        item.overview ? item.overview : 'Sem decrição...'
-                      }
-                    />
-                  </Card>
-                </Row>
-              </Col>
-            ))}
-      </Row>
+      <CardFilms
+        data={searchFilms ? searchFilms : films}
+        removeLocalStorage={removeLocalStorage}
+        saveLocalStorage={saveLocalStorage}
+      />
 
       <Row justify='center' style={{ paddingTop: 10 }}>
         <Button type='primary' onClick={handleFetchMore}>
