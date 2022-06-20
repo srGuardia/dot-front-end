@@ -12,3 +12,27 @@ export const Container = styled.header`
     margin: 0;
   }
 `;
+
+export const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  input {
+    position: relative;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+
+    &::placeholder {
+      color: ${colors.gray};
+    }
+  }
+
+  svg {
+    position: absolute;
+    color: ${colors.gray};
+    right: 0.1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+`;
