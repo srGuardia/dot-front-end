@@ -53,12 +53,18 @@ const Checkout = () => {
 
           <Row gutter={20}>
             <Col span={12}>
-              <Form.Item name='cpf'>
+              <Form.Item
+                name='cpf'
+                rules={[{ required: true, message: 'Campo obrigatório!' }]}
+              >
                 <Input placeholder='CPF' />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name='phone'>
+              <Form.Item
+                name='phone'
+                rules={[{ required: true, message: 'Campo obrigatório!' }]}
+              >
                 <Input placeholder='Celular' />
               </Form.Item>
             </Col>
@@ -66,7 +72,10 @@ const Checkout = () => {
 
           <Row>
             <Col span={24}>
-              <Form.Item name='email'>
+              <Form.Item
+                name='email'
+                rules={[{ required: true, message: 'Campo obrigatório!' }]}
+              >
                 <Input placeholder='E-mail' />
               </Form.Item>
             </Col>
@@ -74,7 +83,10 @@ const Checkout = () => {
 
           <Row gutter={20}>
             <Col span={8}>
-              <Form.Item name='cep'>
+              <Form.Item
+                name='cep'
+                rules={[{ required: true, message: 'Campo obrigatório!' }]}
+              >
                 <Input
                   placeholder='CEP'
                   onBlur={(e) => handleChangeCEP(e.target.value)}
@@ -82,7 +94,10 @@ const Checkout = () => {
               </Form.Item>
             </Col>
             <Col span={16}>
-              <Form.Item name='address'>
+              <Form.Item
+                name='address'
+                rules={[{ required: true, message: 'Campo obrigatório!' }]}
+              >
                 <Input placeholder='Endereço' />
               </Form.Item>
             </Col>
@@ -104,11 +119,7 @@ const Checkout = () => {
       </div>
 
       <div>
-        <ListUserActions data={cart} visibleCart={false} />
-
-        <Button block htmlType='submit' onClick={onFinish}>
-          Finalizar
-        </Button>
+        <ListUserActions data={cart} visibleCart={false} footer />
       </div>
     </Container>
   );

@@ -10,6 +10,7 @@ import api from '../services/api';
 import {
   getFilms,
   LocalStorageProps,
+  removeAll,
   removeFilms,
   saveFilms,
 } from '../utils/functions';
@@ -39,6 +40,7 @@ type ContextProps = {
   handleSearchFilms: (search: string) => void;
   saveLocalStorage: (type: LocalStorageProps, data: Films) => void;
   removeLocalStorage: (type: LocalStorageProps, data: Films) => void;
+  removeAllLocalStorage: (type: LocalStorageProps) => void;
 };
 
 type AppProps = {
@@ -113,17 +115,35 @@ export const AppProvider = ({ children }: AppProps) => {
       if (type === LocalStorageProps.cart) {
         const result = await getFilms(type);
         setCart(result);
+        message.warning('Removido do carrinho');
         return;
       }
 
       if (type === LocalStorageProps.favorites) {
         const result = await getFilms(type);
         setFavorites(result);
+        message.warning('Removido dos favoritos');
         return;
       }
     },
     []
   );
+
+  const removeAllLocalStorage = useCallback(async (type: LocalStorageProps) => {
+    await removeAll(type);
+
+    if (type === LocalStorageProps.cart) {
+      setCart([]);
+      message.warning('Carrinho limpo');
+      return;
+    }
+
+    if (type === LocalStorageProps.favorites) {
+      setFavorites([]);
+      message.warning('Favoritos limpo');
+      return;
+    }
+  }, []);
 
   return (
     <AppContext.Provider
@@ -138,6 +158,7 @@ export const AppProvider = ({ children }: AppProps) => {
         handleSearchFilms,
         saveLocalStorage,
         removeLocalStorage,
+        removeAllLocalStorage,
       }}
     >
       {children}

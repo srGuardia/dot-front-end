@@ -1,11 +1,43 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import colors from '../../global/colors';
+
+type StyledProps = {
+  isDivider?: boolean;
+};
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 100%;
+`;
+
+export const Content = styled.div`
+  overflow: auto;
+`;
+
+export const List = styled.div<StyledProps>`
+  position: relative;
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
   gap: 1rem;
   margin-top: 1rem;
+  padding-bottom: 1rem;
+
+  ${({ isDivider }) =>
+    isDivider &&
+    css`
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 0.2rem;
+        background-color: ${colors.gray};
+      }
+    `}
 
   &:first-child {
     margin-top: 0;
@@ -32,5 +64,23 @@ export const Container = styled.div`
 
   svg {
     cursor: pointer;
+  }
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  margin-top: 3rem;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    strong {
+      font-size: 1.3rem;
+    }
   }
 `;
