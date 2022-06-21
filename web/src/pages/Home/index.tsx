@@ -34,7 +34,7 @@ const Home = () => {
         saveLocalStorage={saveLocalStorage}
       />
 
-      <Row justify='center' style={{ paddingTop: 10 }}>
+      <Row justify='center' style={{ marginTop: '2.5rem' }}>
         <Button type='primary' onClick={handleFetchMore}>
           Carregar mais
         </Button>

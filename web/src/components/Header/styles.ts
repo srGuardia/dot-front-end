@@ -7,9 +7,16 @@ export const Container = styled.header`
 
   h1,
   svg {
+    cursor: pointer;
     color: ${colors.white};
     font-size: 2rem;
     margin: 0;
+  }
+
+  @media (max-width: 425px) {
+    h1 {
+      display: none;
+    }
   }
 `;
 

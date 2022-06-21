@@ -1,5 +1,7 @@
 import { Films } from '../context';
 import { axiosConfig } from './config';
+import axios from 'axios';
+import { ViaCEP } from '../@types/cep';
 
 class APIService {
   async getTopRated(page: number): Promise<Films[] | []> {
@@ -9,7 +11,7 @@ class APIService {
 
     let newData: Films[] = [];
 
-    const newObj = formatData.forEach((item) => {
+    formatData.forEach((item) => {
       const obj = {
         ...item,
         price: 79.99,
@@ -30,7 +32,24 @@ class APIService {
 
     const formatData = data.results as Films[];
 
-    return formatData;
+    let newData: Films[] = [];
+
+    formatData.forEach((item) => {
+      const obj = {
+        ...item,
+        price: 79.99,
+      };
+
+      newData.push(obj);
+    });
+
+    return newData;
+  }
+
+  async getCEP(value: number): Promise<ViaCEP> {
+    const { data } = await axios.get(`https://viacep.com.br/ws/${value}/json/`);
+
+    return data;
   }
 }
 

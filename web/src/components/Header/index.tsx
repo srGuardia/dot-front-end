@@ -7,18 +7,21 @@ import {
 import { Badge, Col, Row } from 'antd';
 import { AppContext } from '../../context';
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const { onCloseDrawer, handleSearchFilms, cart } = useContext(AppContext);
 
   const [search, setSearch] = useState('');
 
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Row>
         <Col span={12}>
           <Row justify='space-between' align='middle'>
-            <h1>LOGO</h1>
+            <h1 onClick={() => navigate('/')}>LOGO</h1>
             <InputContainer>
               <input
                 type='text'

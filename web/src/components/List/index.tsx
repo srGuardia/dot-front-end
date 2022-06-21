@@ -1,6 +1,10 @@
-import { Col, Empty, Row, Tooltip } from 'antd';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Films } from '../../context';
+import { Empty, Tooltip } from 'antd';
+import { useContext } from 'react';
+import { FaTrash, FaShoppingCart } from 'react-icons/fa';
+import { AppContext, Films } from '../../context';
+import colors from '../../global/colors';
+import { LocalStorageProps } from '../../utils/functions';
+import { Container } from './styles';
 
 type ListProps = {
   data: Films[];
@@ -8,31 +12,60 @@ type ListProps = {
 };
 
 export const ListUserActions = ({ data, visibleCart }: ListProps) => {
-  console.log(data);
+  const { saveLocalStorage, removeLocalStorage } = useContext(AppContext);
   return (
     <>
       {data.length === 0 ? (
         <Empty />
       ) : (
         data.map((item, index) => (
-          <Row key={index} justify='space-evenly'>
-            <Col>
+          <Container key={index}>
+            <div>
               <img
                 src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                 alt={item.title}
                 loading='lazy'
               />
               <span>{item.title}</span>
-            </Col>
-            <Col>
+            </div>
+
+            <div>
               <strong>R${item.price}</strong>
-            </Col>
-            <Col>
-              <Tooltip title='Adicionar ao carrinho'>
-                <AiOutlineShoppingCart onClick={() => {}} />
+            </div>
+
+            <div>
+              {visibleCart && (
+                <Tooltip title='Adicionar ao carrinho'>
+                  <FaShoppingCart
+                    color={colors.primary}
+                    onClick={() =>
+                      saveLocalStorage(LocalStorageProps.cart, item)
+                    }
+                  />
+                </Tooltip>
+              )}
+
+              <Tooltip
+                title={
+                  visibleCart ? 'Remover dos favoritos' : 'Remover do carrinho'
+                }
+                placement='topRight'
+                arrowPointAtCenter
+              >
+                <FaTrash
+                  color={colors.red}
+                  onClick={() =>
+                    removeLocalStorage(
+                      !visibleCart
+                        ? LocalStorageProps.cart
+                        : LocalStorageProps.favorites,
+                      item
+                    )
+                  }
+                />
               </Tooltip>
-            </Col>
-          </Row>
+            </div>
+          </Container>
         ))
       )}
     </>

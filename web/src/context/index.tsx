@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import {
   createContext,
   ReactNode,
@@ -91,12 +92,14 @@ export const AppProvider = ({ children }: AppProps) => {
       if (type === LocalStorageProps.cart) {
         const result = await getFilms(type);
         setCart(result);
+        message.success('Adicionado ao carrinho');
         return;
       }
 
       if (type === LocalStorageProps.favorites) {
         const result = await getFilms(type);
         setFavorites(result);
+        message.success('Adicionado aos favoritos');
         return;
       }
     },
