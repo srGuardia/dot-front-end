@@ -3,18 +3,30 @@ import colors from '../../global/colors';
 
 type StyledProps = {
   isDivider?: boolean;
+  isDrawer?: boolean;
 };
 
-export const Container = styled.div`
+export const Container = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   max-height: 100%;
+
+  ${({ isDrawer }) =>
+    !isDrawer &&
+    css`
+      @media (max-width: 768px) {
+        max-height: 40%;
+      }
+      @media (max-width: 425px) {
+        max-height: 23%;
+      }
+    `}
 `;
 
 export const Content = styled.div`
-  overflow: auto;
+  overflow-x: hidden;
 `;
 
 export const List = styled.div<StyledProps>`

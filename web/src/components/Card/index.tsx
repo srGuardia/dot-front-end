@@ -7,7 +7,11 @@ import {
 } from 'react-icons/ai';
 import { Films } from '../../context';
 import colors from '../../global/colors';
-import { isFavorite, LocalStorageProps } from '../../utils/functions';
+import {
+  formatCurrency,
+  isFavorite,
+  LocalStorageProps,
+} from '../../utils/functions';
 import { Price, RateContainer } from './styles';
 
 type CardProps = {
@@ -66,7 +70,7 @@ export const CardFilms = ({
               description={item.overview ? item.overview : 'Sem decrição...'}
             />
             <Price>
-              <strong>R$&nbsp;{item.price}</strong>
+              <strong>{formatCurrency(item.price)}</strong>
             </Price>
           </Card>
         </Row>

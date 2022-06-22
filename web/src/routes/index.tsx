@@ -46,6 +46,7 @@ export const AppRoutes = () => {
           data={titleDrawer === 'Meu Carrinho' ? cart : favorites}
           visibleCart={titleDrawer === 'Meu Carrinho' ? false : true}
           footer={titleDrawer === 'Meu Carrinho' ? true : false}
+          isDrawer
         />
       </Drawer>
       <Suspense fallback='Carregando...'>

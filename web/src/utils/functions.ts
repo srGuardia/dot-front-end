@@ -47,3 +47,27 @@ export const isFavorite = (id: number, type: LocalStorageProps) => {
 
   return false;
 };
+
+export const getTotalCurrency = (): number => {
+  const data = localStorage.getItem(`@WEB:${LocalStorageProps.cart}`);
+
+  const dataFilms = data ? (JSON.parse(data) as Films[]) : [];
+
+  let currency: number = 0;
+
+  dataFilms.forEach((item, index) => {
+    currency += dataFilms[index].price;
+  });
+
+  return dataFilms.length === 0 ? 0.0 : Number(currency);
+};
+
+export const formatCurrency = (value: number) => {
+  const newValue = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+  }).format(value);
+
+  return newValue;
+};

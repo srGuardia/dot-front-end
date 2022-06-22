@@ -1,10 +1,14 @@
 import { Empty, Tooltip } from 'antd';
 import { useContext } from 'react';
 import { FaTrash, FaShoppingCart } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AppContext, Films } from '../../context';
 import colors from '../../global/colors';
-import { LocalStorageProps } from '../../utils/functions';
+import {
+  formatCurrency,
+  getTotalCurrency,
+  LocalStorageProps,
+} from '../../utils/functions';
 import { Button } from '../Button';
 import { Container, Content, Footer, List } from './styles';
 
@@ -12,6 +16,7 @@ type ListProps = {
   data: Films[];
   visibleCart: boolean;
   isDivider?: boolean;
+  isDrawer?: boolean;
   footer?: boolean;
 };
 
@@ -19,12 +24,21 @@ export const ListUserActions = ({
   data,
   visibleCart,
   isDivider,
+  isDrawer,
   footer,
 }: ListProps) => {
-  const { saveLocalStorage, removeLocalStorage } = useContext(AppContext);
+  const { saveLocalStorage, removeLocalStorage, onCloseDrawer } =
+    useContext(AppContext);
   const navigate = useNavigate();
+  const route = useLocation();
+
+  const handleNavigate = () => {
+    if (route.pathname === '/checkout') return;
+    navigate('/checkout');
+    onCloseDrawer();
+  };
   return (
-    <Container>
+    <Container isDrawer={isDrawer}>
       <Content>
         {data.length === 0 ? (
           <Empty />
@@ -41,7 +55,7 @@ export const ListUserActions = ({
               </div>
 
               <div>
-                <strong>R${item.price}</strong>
+                <strong>{formatCurrency(item.price)}</strong>
               </div>
 
               <div>
@@ -87,9 +101,15 @@ export const ListUserActions = ({
         <Footer>
           <div>
             <span>Total:</span>
-            <strong>R$&nbsp;79,99</strong>
+            <strong>{formatCurrency(getTotalCurrency())}</strong>
           </div>
-          <Button block type='default' onClick={() => navigate('/checkout')}>
+          <Button
+            block
+            type='default'
+            htmlType='submit'
+            onClick={handleNavigate}
+            disabled={data.length > 0 ? false : true}
+          >
             Finalizar compra
           </Button>
         </Footer>

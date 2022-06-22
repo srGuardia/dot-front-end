@@ -8,6 +8,7 @@ import { Badge, Col, Row } from 'antd';
 import { AppContext } from '../../context';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import colors from '../../global/colors';
 
 export const Header = () => {
   const { onCloseDrawer, handleSearchFilms, cart } = useContext(AppContext);
@@ -36,7 +37,11 @@ export const Header = () => {
         <Col span={12}>
           <Row align='middle' justify='end'>
             <AiFillHeart onClick={() => onCloseDrawer('Meus Favoritos')} />
-            <Badge count={cart.length}>
+            <Badge
+              count={cart.length}
+              color={colors.yellow}
+              style={{ color: colors.black }}
+            >
               <AiOutlineShoppingCart
                 onClick={() => onCloseDrawer('Meu Carrinho')}
               />
