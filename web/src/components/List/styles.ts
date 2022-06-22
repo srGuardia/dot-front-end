@@ -27,6 +27,10 @@ export const Container = styled.div<StyledProps>`
 
 export const Content = styled.div`
   overflow-x: hidden;
+
+  @media (max-width: 425px) {
+    overflow-y: scroll;
+  }
 `;
 
 export const List = styled.div<StyledProps>`
