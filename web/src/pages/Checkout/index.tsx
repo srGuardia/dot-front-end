@@ -6,7 +6,7 @@ import api from '../../services/api';
 import { FormWrapper } from './styles';
 import { MaskedInput } from 'antd-mask-input';
 import { useNavigate } from 'react-router-dom';
-import { LocalStorageProps } from '../../utils/functions';
+import { LocalStorageProps } from '../../@types/storage';
 
 const Checkout = () => {
   const { cart, removeAllLocalStorage } = useContext(AppContext);

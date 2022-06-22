@@ -1,9 +1,5 @@
-import { Films } from '../context';
-
-export enum LocalStorageProps {
-  cart = 'cart',
-  favorites = 'favorites',
-}
+import { Films } from '../@types/films';
+import { LocalStorageProps } from '../@types/storage';
 
 export const getFilms = async (
   type: LocalStorageProps

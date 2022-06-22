@@ -8,8 +8,8 @@ const Checkout = lazy(() => import('../pages/Checkout'));
 import { ListUserActions } from '../components/List';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
-import { LocalStorageProps } from '../utils/functions';
 import { Drawer } from '../components/Drawer';
+import { LocalStorageProps } from '../@types/storage';
 
 export const AppRoutes = () => {
   const {

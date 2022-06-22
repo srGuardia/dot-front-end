@@ -1,8 +1,9 @@
 import { Button, Card, Row } from 'antd';
 import { useContext, useEffect, useState } from 'react';
+import { Films } from '../../@types/films';
 
 import { CardFilms } from '../../components/Card';
-import { AppContext, Films } from '../../context';
+import { AppContext } from '../../context';
 import api from '../../services/api';
 import { Container } from './styles';
 

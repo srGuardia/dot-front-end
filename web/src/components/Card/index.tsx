@@ -5,13 +5,10 @@ import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
 } from 'react-icons/ai';
-import { Films } from '../../context';
+import { Films } from '../../@types/films';
+import { LocalStorageProps } from '../../@types/storage';
 import colors from '../../global/colors';
-import {
-  formatCurrency,
-  isFavorite,
-  LocalStorageProps,
-} from '../../utils/functions';
+import { formatCurrency, isFavorite } from '../../utils/functions';
 import { Price, RateContainer } from './styles';
 
 type CardProps = {

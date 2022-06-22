@@ -6,31 +6,17 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { Films } from '../@types/films';
+import { LocalStorageProps } from '../@types/storage';
 import api from '../services/api';
 import {
   getFilms,
-  LocalStorageProps,
   removeAll,
   removeFilms,
   saveFilms,
 } from '../utils/functions';
 
-type UserProps = {
-  name: string;
-};
-
-export type Films = {
-  id: number;
-  title: string;
-  vote_average: number;
-  poster_path: string;
-  overview: string;
-  the_amount: number;
-  price: number;
-};
-
 type ContextProps = {
-  user: UserProps;
   searchFilms: Films[] | null;
   favorites: Films[];
   cart: Films[];
@@ -48,9 +34,6 @@ type AppProps = {
 };
 
 export const AppContext = createContext({} as ContextProps);
-const user: UserProps = {
-  name: 'Uzumaki Naruto',
-};
 
 export const AppProvider = ({ children }: AppProps) => {
   const [visible, setVisible] = useState(false);
@@ -148,7 +131,6 @@ export const AppProvider = ({ children }: AppProps) => {
   return (
     <AppContext.Provider
       value={{
-        user,
         searchFilms,
         favorites,
         cart,

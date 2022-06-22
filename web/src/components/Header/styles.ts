@@ -14,8 +14,8 @@ export const Container = styled.header`
   }
 
   @media (max-width: 425px) {
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
   }
 `;
 

@@ -1,7 +1,7 @@
-import { Films } from '../context';
 import { axiosConfig } from './config';
 import axios from 'axios';
 import { ViaCEP } from '../@types/cep';
+import { Films } from '../@types/films';
 
 class APIService {
   async getTopRated(page: number): Promise<Films[] | []> {

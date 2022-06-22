@@ -6,7 +6,7 @@ import {
 } from 'react-icons/ai';
 import { Badge, Col, Row } from 'antd';
 import { AppContext } from '../../context';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import colors from '../../global/colors';
 

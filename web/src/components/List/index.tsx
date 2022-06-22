@@ -2,13 +2,11 @@ import { Empty, Tooltip } from 'antd';
 import { useContext } from 'react';
 import { FaTrash, FaShoppingCart } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AppContext, Films } from '../../context';
+import { Films } from '../../@types/films';
+import { LocalStorageProps } from '../../@types/storage';
+import { AppContext } from '../../context';
 import colors from '../../global/colors';
-import {
-  formatCurrency,
-  getTotalCurrency,
-  LocalStorageProps,
-} from '../../utils/functions';
+import { formatCurrency, getTotalCurrency } from '../../utils/functions';
 import { Button } from '../Button';
 import { Container, Content, Footer, List } from './styles';
 
