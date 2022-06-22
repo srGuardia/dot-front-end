@@ -37,7 +37,7 @@ export const ListUserActions = ({
   };
   return (
     <Container isDrawer={isDrawer}>
-      <Content>
+      <Content isDrawer={isDrawer}>
         {data.length === 0 ? (
           <Empty />
         ) : (

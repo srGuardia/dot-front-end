@@ -17,20 +17,22 @@ export const Container = styled.div<StyledProps>`
     !isDrawer &&
     css`
       @media (max-width: 768px) {
-        max-height: 40%;
-      }
-      @media (max-width: 425px) {
-        max-height: 23%;
+        padding-bottom: 7rem;
+        justify-content: space-around;
       }
     `}
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<StyledProps>`
   overflow-x: hidden;
 
-  @media (max-width: 425px) {
-    overflow-y: scroll;
-  }
+  ${({ isDrawer }) =>
+    !isDrawer &&
+    css`
+      @media (max-width: 768px) {
+        max-height: 70%;
+      }
+    `}
 `;
 
 export const List = styled.div<StyledProps>`

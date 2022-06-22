@@ -5,7 +5,7 @@ export const FormWrapper = styled(Form)`
   display: flex;
   gap: 2rem;
   margin: 0 auto;
-  margin-top: 2rem;
+  padding: 2rem;
   width: 70%;
   height: 40%;
 
@@ -13,7 +13,6 @@ export const FormWrapper = styled(Form)`
     flex-direction: column;
     height: 100%;
     width: 100%;
-    padding: 0 2rem;
     overflow: scroll;
   }
   @media (max-width: 425px) {

@@ -134,7 +134,7 @@ const Checkout = () => {
           </Row>
         </div>
 
-        <ListUserActions data={cart} visibleCart={false} footer />
+        <ListUserActions data={cart} visibleCart={false} isDivider footer />
       </FormWrapper>
     </>
   );
