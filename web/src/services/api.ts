@@ -15,6 +15,7 @@ class APIService {
       const obj = {
         ...item,
         price: 79.99,
+        the_amount: 0,
       };
 
       newData.push(obj);

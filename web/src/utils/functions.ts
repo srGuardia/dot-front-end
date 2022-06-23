@@ -13,7 +13,24 @@ export const getFilms = async (
 
 export const saveFilms = async (type: LocalStorageProps, data: Films) => {
   const result = await getFilms(type);
-  const obj = [...result, data];
+
+  let obj = [];
+
+  const filterData = result.find((item) => item.id === data.id);
+  const indexData = result.findIndex((item) => item.id === data.id);
+
+  if (filterData) {
+    const newData = result[indexData];
+    newData.the_amount++;
+    newData.price = data.price * newData.the_amount;
+
+    const newResult = result.slice(indexData, indexData);
+
+    obj = [...result, ...newResult];
+  } else {
+    data.the_amount = +1;
+    obj = [...result, data];
+  }
 
   await localStorage.setItem(`@WEB:${type}`, JSON.stringify(obj));
 };
@@ -66,4 +83,18 @@ export const formatCurrency = (value: number) => {
   }).format(value);
 
   return newValue;
+};
+
+export const getTotalItems = () => {
+  const data = localStorage.getItem(`@WEB:${LocalStorageProps.cart}`);
+
+  const dataFilms = data ? (JSON.parse(data) as Films[]) : [];
+
+  let totalItems = 0;
+
+  dataFilms.forEach((item) => {
+    totalItems += item.the_amount;
+  });
+
+  return totalItems;
 };

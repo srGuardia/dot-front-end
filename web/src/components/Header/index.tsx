@@ -9,9 +9,10 @@ import { AppContext } from '../../context';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import colors from '../../global/colors';
+import { getTotalItems } from '../../utils/functions';
 
 export const Header = () => {
-  const { onCloseDrawer, handleSearchFilms, cart } = useContext(AppContext);
+  const { onCloseDrawer, handleSearchFilms } = useContext(AppContext);
 
   const [search, setSearch] = useState('');
 
@@ -38,7 +39,7 @@ export const Header = () => {
           <Row align='middle' justify='end'>
             <AiFillHeart onClick={() => onCloseDrawer('Meus Favoritos')} />
             <Badge
-              count={cart.length}
+              count={Number(getTotalItems())}
               color={colors.yellow}
               style={{ color: colors.black }}
             >

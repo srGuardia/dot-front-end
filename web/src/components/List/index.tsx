@@ -56,6 +56,12 @@ export const ListUserActions = ({
                 <strong>{formatCurrency(item.price)}</strong>
               </div>
 
+              {footer && (
+                <div>
+                  <span>{item.the_amount}</span>
+                </div>
+              )}
+
               <div>
                 {visibleCart && (
                   <Tooltip title='Adicionar ao carrinho'>

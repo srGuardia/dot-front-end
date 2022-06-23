@@ -69,14 +69,15 @@ export const List = styled.div<StyledProps>`
     display: flex;
     gap: 2rem;
     align-items: center;
+    flex: 1;
+    justify-content: center;
 
     &:first-child {
-      flex: 1;
+      flex: 2;
     }
 
-    &:nth-child(2) {
-      flex: 1;
-      justify-content: center;
+    &:last-child {
+      flex: 0;
     }
   }
 
