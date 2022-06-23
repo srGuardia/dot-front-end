@@ -10,15 +10,17 @@ import { Container } from './styles';
 const Home = () => {
   const [films, setFilms] = useState<Films[] | []>([]);
   let [page, setPage] = useState(1);
-  const { searchFilms, saveLocalStorage, removeLocalStorage } =
+  const { searchFilms, saveLocalStorage, removeLocalStorage, handleLoading } =
     useContext(AppContext);
 
   const getFilms = async () => {
     const result = await api.getTopRated(page);
     setFilms((prevState) => [...prevState, ...result]);
+    handleLoading();
   };
 
   const handleFetchMore = () => {
+    handleLoading();
     setPage((page += 1));
     getFilms();
   };

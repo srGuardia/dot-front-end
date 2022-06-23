@@ -17,6 +17,7 @@ import {
 } from '../utils/functions';
 
 type ContextProps = {
+  loading: boolean;
   searchFilms: Films[] | null;
   favorites: Films[];
   cart: Films[];
@@ -27,6 +28,7 @@ type ContextProps = {
   saveLocalStorage: (type: LocalStorageProps, data: Films) => void;
   removeLocalStorage: (type: LocalStorageProps, data: Films) => void;
   removeAllLocalStorage: (type: LocalStorageProps) => void;
+  handleLoading: () => void;
 };
 
 type AppProps = {
@@ -41,6 +43,7 @@ export const AppProvider = ({ children }: AppProps) => {
   const [favorites, setFavorites] = useState<Films[] | []>([]);
   const [cart, setCart] = useState<Films[] | []>([]);
   const [searchFilms, setSearchFilms] = useState<Films[] | null>(null);
+  const [loading, setLoading] = useState(true);
 
   async function getDataStorage() {
     const resultFavorites = await getFilms(LocalStorageProps.favorites);
@@ -128,9 +131,14 @@ export const AppProvider = ({ children }: AppProps) => {
     }
   }, []);
 
+  const handleLoading = () => {
+    setLoading((prevState) => !prevState);
+  };
+
   return (
     <AppContext.Provider
       value={{
+        loading,
         searchFilms,
         favorites,
         cart,
@@ -141,6 +149,7 @@ export const AppProvider = ({ children }: AppProps) => {
         saveLocalStorage,
         removeLocalStorage,
         removeAllLocalStorage,
+        handleLoading,
       }}
     >
       {children}
