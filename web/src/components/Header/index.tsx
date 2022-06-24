@@ -12,18 +12,24 @@ import colors from '../../global/colors';
 import { getTotalItems } from '../../utils/functions';
 
 export const Header = () => {
-  const { onCloseDrawer, handleSearchFilms } = useContext(AppContext);
+  const { onCloseDrawer, handleSearchFilms, handleLoading } =
+    useContext(AppContext);
 
   const [search, setSearch] = useState('');
 
   const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    handleLoading();
+    navigate('/');
+  };
 
   return (
     <Container>
       <Row>
         <Col span={12}>
           <Row justify='space-between' align='middle'>
-            <h1 onClick={() => navigate('/')}>LOGO</h1>
+            <h1 onClick={handleNavigate}>LOGO</h1>
             <InputContainer>
               <input
                 type='text'
