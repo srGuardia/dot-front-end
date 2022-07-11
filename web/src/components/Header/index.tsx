@@ -3,6 +3,7 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
   AiOutlineSearch,
+  AiOutlineHeart,
 } from 'react-icons/ai';
 import { Badge, Col, Row } from 'antd';
 import { AppContext } from '../../context';
@@ -12,7 +13,7 @@ import colors from '../../global/colors';
 import { getTotalItems } from '../../utils/functions';
 
 export const Header = () => {
-  const { onCloseDrawer, handleSearchFilms, handleLoading } =
+  const { onCloseDrawer, handleSearchFilms, handleLoading, favorites } =
     useContext(AppContext);
 
   const [search, setSearch] = useState('');
@@ -43,7 +44,14 @@ export const Header = () => {
 
         <Col span={12}>
           <Row align='middle' justify='end'>
-            <AiFillHeart onClick={() => onCloseDrawer('Meus Favoritos')} />
+            {favorites.length > 0 ? (
+              <AiFillHeart
+                onClick={() => onCloseDrawer('Meus Favoritos')}
+                color={colors.red}
+              />
+            ) : (
+              <AiOutlineHeart />
+            )}
             <Badge
               count={Number(getTotalItems())}
               color={colors.yellow}
