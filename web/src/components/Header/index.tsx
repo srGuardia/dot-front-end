@@ -50,7 +50,7 @@ export const Header = () => {
                 color={colors.red}
               />
             ) : (
-              <AiOutlineHeart />
+              <AiOutlineHeart onClick={() => onCloseDrawer('Meus Favoritos')} />
             )}
             <Badge
               count={Number(getTotalItems())}
